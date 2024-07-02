@@ -5,4 +5,3 @@ if (prompt('manda ai') == numeroSecreto) {
 } else {
     console.log(`Se é burro é? O número era ${numeroSecreto}`)
 }
-
