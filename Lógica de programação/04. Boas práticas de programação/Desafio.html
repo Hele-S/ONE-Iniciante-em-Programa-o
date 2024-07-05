@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="background-color: black;">
+    <script>
+        let desafio
+        let nome
+        let valor1
+        let valor2
+        let resultado
+        do {
+            desafio = parseInt(prompt('Número do desafio'))
+            switch (desafio) {
+                case 1:
+                    console.log(`boas vindas meu chapa.`)
+                    break
+                case 2:
+                    nome = 'Hele'
+                    console.log(`Olá ${nome}`)
+                    break
+                case 3:
+                    nome = 'Hele'
+                    alert(`Olá ${nome}`)
+                    break
+                case 4:
+                    let linguagemFavorita = prompt('Qual a linguagem de programação que você mais gosta?')
+                    console.log(linguagemFavorita)
+                    break
+                case 5:
+                    valor1 = parseInt(Math.random() * 5 + 1);
+                    valor2 = parseInt(Math.random() * 5 + 1);
+                    resultado = valor1 + valor2;
+                    console.log(`A soma de ${valor1} e ${valor2} é igual a ${resultado}.`);
+                    break
+                case 6:
+                    valor1 = parseInt(Math.random() * 5 + 1);
+                    valor2 = parseInt(Math.random() * 5 + 1);
+                    resultado = valor1 - valor2;
+                    console.log(`A diferença entre ${valor1} e ${valor2} é igual a ${resultado}.`);
+                    break
+                case 7:
+                    let idade = prompt(`Insira sua idade:`);
+                    console.log(idade >= 18 ? `Você é maior de idade (${idade} anos)` : `Você é menor de idade (${idade} anos)`);
+                    break
+                case 8:
+                    let numero = prompt(`Insira um n    umero qualquer`)
+                    if (numero > 0) {
+                        console.log(`${numero} é um número positivo`)
+                    } else {
+                        console.log(`${numero} é um número negativo (ou 0)`)
+                    }
+                    break
+                case 9:
+                    let contagem = 0
+                    while (contagem < 10) {
+                        contagem++
+                        console.log(`contagem: ${contagem}`)
+                    }
+                    break
+                case 10:
+                    let nota = parseInt(Math.random() * 10 + 1)
+                    if (nota >= 7) {
+                        console.log('Aprovado')
+                    } else {
+                        console.log('Reprovado')
+                    }
+                    break
+                case 11:
+                    console.log(Math.random())
+                    break
+                case 12:
+                    console.log(Math.random() * 10 + 1)
+                    break
+                case 13:
+                    console.log(Math.random() * 1000 + 1)
+                    break
+            }
+        } while (desafio <= 13)
+    </script>
+</body>
+
+</html>
