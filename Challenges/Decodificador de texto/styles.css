@@ -42,7 +42,7 @@ div#input>textarea {
 
 }
 
-div#input>textarea::placeholder {
+div#input>textarea::placeholder, div#output>textarea::placeholder {
     color: #0A3871;
 }
 

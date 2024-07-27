@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
-    
-})
 
+})
+//Encriptando a mensagem
 function encrypt() {
     const input = document.getElementById('textarea').value
     let package = ''
@@ -39,9 +39,14 @@ function encrypt() {
         document.getElementById('outputPlaceholder').style.display = 'block'
     }
 }
-
+//Resolvendo a mensagem
 function decrypt() {
     const code = document.getElementById('textarea').value
+    let product = ''
+    let check = false
+    let target = undefined
+    let start = undefined
+    let end = 0
     const toObject = function (code) {
         let result = Object()
         let lenght = 0
@@ -51,113 +56,63 @@ function decrypt() {
         }
         return result
     }
-    let subject = toObject(code)
-    let product = ''
-    let target
-    for (i in subject) {
-        // console.log(i)
-        if (subject[i] == 'a') {
-            if (aFound(subject, i)) {
-                product += 'a'
-                target = parseInt(i)
-                delete subject[target + 1]
-            } else {
-                product += (subject[i])
+    //Códigos e seus respectivos resultados
+    let passwords = {
+        a: 'ai',
+        e: 'enter',
+        i: 'imes',
+        o: 'ober',
+        u: 'ufat'
+    }
+    //Array com os diferentes comprimentos obsverváveis das senha em passwords, cada valor aparece 1 vez
+    let lengths = passwords => {
+        target = 0
+        let arr = Array()
+        for (i in passwords) {
+            for (k of passwords[i]) {
+                target++
+            }
+            for (k of arr) {
+                if (target == k) {
+                    check = true
+                }
+            }
+            if (!check) {
+                arr.push(target)
+            }
+            check = false
+            target = 0
+        }
+        console.log(arr)
+        return arr
+    }
+    //Escaneando o código e encontrando as senhas
+    const ArrayLengths = lengths(passwords)
+    for (start = 0; start <= code.length; start++) {
+        check = false
+        for (i of ArrayLengths) {
+            end = (i + start)
+            for (k in passwords) {
+                if (code.slice(start, end) == passwords[k]) {
+                    product += k
+                    check = true
+                    start = end - 1
+                    break;
+                }
+            }
+            if (check) {
+                break;
             }
         }
-        else if (subject[i] == 'e') {
-            if (eFound(subject, i)) {
-                product += 'e'
-                target = parseInt(i)
-                delete subject[target + 1]
-                delete subject[target+2]
-                delete subject[target+3]
-                delete subject[target+4]
-            } else {
-                product += (subject[i])
-            }
-        }
-        else if (subject[i] == 'i') {
-            if (iFound(subject, i)) {
-                product += 'i'
-                target = parseInt(i)
-                delete subject[target + 1]
-                delete subject[target + 2]
-                delete subject[target + 3]
-            } else {
-                product += (subject[i])
-            }
-        }
-        else if (subject[i] == 'o') {
-            if (oFound(subject, i)) {
-                product += 'o'
-                target = parseInt(i)
-                delete subject[target + 1]
-                delete subject[target + 2]
-                delete subject[target + 3]
-            } else {
-                product += (subject[i])
-            }
-        }
-        else if (subject[i] == 'u') {
-            if (uFound(subject, i)) {
-                product += 'u'
-                target = parseInt(i)
-                delete subject[target + 1]
-                delete subject[target + 2]
-                delete subject[target + 3]
-            } else {
-                product += (subject[i])
-            }
-        }
-        else {
-            product += (subject[i])
+        if (!check) {
+            product += code.substr(start, 1)
         }
     }
     document.getElementById('textarea_output').value = product
-
 }
-
-function aFound(subject, iString) {
-    let i = parseInt(iString)
-    if (subject[i + 1] == 'i') {
-        return true
-    }
-}
-
-function eFound(subject, iString) {
-    let i = parseInt(iString)
-    if (subject[i + 1] == 'n' && subject[i + 2] == 't' && subject[i + 3] == 'e' && subject[i + 4] == 'r') {
-        return true
-    }
-}
-
-function iFound(subject, iString) {
-    let i = parseInt(iString)
-    if (subject[i + 1] == 'm' && subject[i + 2] == 'e' && subject[i + 3] == 's') {
-        return true
-    }
-}
-
-function oFound(subject, iString) {
-    let i = parseInt(iString)
-    if (subject[i + 1] == 'b' && subject[i + 2] == 'e' && subject[i + 3] == 'r') {
-        return true
-    }
-}
-
-function uFound(subject, iString) {
-    let i = parseInt(iString)
-    if (subject[i + 1] == 'f' && subject[i + 2] == 'a' && subject[i + 3] == 't') {
-        return true
-    }
-}
-
+//Função copiar
 function copy() {
     const output = document.getElementById('textarea_output').value
     navigator.clipboard.writeText(output)
     document.getElementById('textarea_output').value = ''
-    document.getElementById('textarea_output').ariaPlaceholder = 'ssssssssssssss'
-
-    
 }
