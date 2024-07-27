@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="./app.js"></script>
+    <title>Decodificador de Texto</title>
+</head>
+
+<body>
+    <div>
+        <div class="logo">
+            <a href="#">
+                <img src="https://cdn6.aptoide.com/imgs/5/1/0/510263316ffa2f27ceb8534e57b381c6_icon.png" alt="logo"
+                    class="logo">
+            </a>
+        </div>
+        <div id="input">
+            <textarea name="" id="textarea" placeholder="Digite seu texto"></textarea>
+        </div>
+        <div id="output">
+            <textarea name="" id="textarea_output"></textarea>
+            <div id="outputPlaceholder">
+                <img src="./imgs/placeHolderImage.jpg" alt="">
+                <h3>Nenhuma mensagem encontrada</h3>
+                <p>Digite um texto que você deseja criptografar ou descriptografar</p>
+            </div>
+            <div id="copy_area">
+                <button id="copy">Copiar</button>
+            </div>
+        </div>
+        <div id="outer_pannel">
+            <div id="inner_pannel">
+                <p><span>&#x24D8</span> Apenas letras minúsculas e sem acento.</p>
+                <div class="buttons">
+                    <button id="Crip" onclick={encrypt()}>Criptografar</button>
+                    <button id="Decrip" onclick={decrypt()}>Descriptografar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
