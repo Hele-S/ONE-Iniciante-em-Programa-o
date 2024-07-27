@@ -1,10 +1,12 @@
 // Aumentar tamanho do input
 document.addEventListener('DOMContentLoaded', function () {
     const textarea = document.getElementById('textarea');
+    document.getElementById('textarea_output').style.display = 'none';
     textarea.addEventListener('input', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
+    
 })
 
 function encrypt() {
@@ -27,8 +29,10 @@ function encrypt() {
         }
     }
     document.getElementById('textarea_output').value = package
+    document.getElementById('textarea').value = ''
     if (document.getElementById('textarea_output').value != '') {
         document.getElementById('copy').style.display = 'block'
+        document.getElementById('textarea_output').style.display = 'block';
         document.getElementById('outputPlaceholder').style.display = 'none'
     } else {
         document.getElementById('copy').style.display = 'none'
@@ -37,7 +41,7 @@ function encrypt() {
 }
 
 function decrypt() {
-    const code = document.getElementById('textarea_output').value
+    const code = document.getElementById('textarea').value
     const toObject = function (code) {
         let result = Object()
         let lenght = 0
@@ -57,6 +61,8 @@ function decrypt() {
                 product += 'a'
                 target = parseInt(i)
                 delete subject[target + 1]
+            } else {
+                product += (subject[i])
             }
         }
         else if (subject[i] == 'e') {
@@ -108,7 +114,7 @@ function decrypt() {
             product += (subject[i])
         }
     }
-    console.log(product)
+    document.getElementById('textarea_output').value = product
 
 }
 
@@ -145,4 +151,13 @@ function uFound(subject, iString) {
     if (subject[i + 1] == 'f' && subject[i + 2] == 'a' && subject[i + 3] == 't') {
         return true
     }
+}
+
+function copy() {
+    const output = document.getElementById('textarea_output').value
+    navigator.clipboard.writeText(output)
+    document.getElementById('textarea_output').value = ''
+    document.getElementById('textarea_output').ariaPlaceholder = 'ssssssssssssss'
+
+    
 }

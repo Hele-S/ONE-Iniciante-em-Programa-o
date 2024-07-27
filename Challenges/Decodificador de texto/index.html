@@ -21,14 +21,14 @@
             <textarea name="" id="textarea" placeholder="Digite seu texto"></textarea>
         </div>
         <div id="output">
-            <textarea name="" id="textarea_output"></textarea>
+            <textarea name="" placeholder="Nenhuma mensagem" id="textarea_output" readonly></textarea>
             <div id="outputPlaceholder">
                 <img src="./imgs/placeHolderImage.jpg" alt="">
                 <h3>Nenhuma mensagem encontrada</h3>
                 <p>Digite um texto que você deseja criptografar ou descriptografar</p>
             </div>
             <div id="copy_area">
-                <button id="copy">Copiar</button>
+                <button id="copy" onclick={copy()}>Copiar</button>
             </div>
         </div>
         <div id="outer_pannel">
