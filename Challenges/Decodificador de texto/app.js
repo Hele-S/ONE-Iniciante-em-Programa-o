@@ -1,69 +1,67 @@
-// Aumentar tamanho do input
+//Senhas
+const passwords = {
+    a: 'ai',
+    e: 'enter',
+    i: 'imes',
+    o: 'ober',
+    u: 'ufat'
+}
+
+//Aumentar tamanho do input
 document.addEventListener('DOMContentLoaded', function () {
-    const textarea = document.getElementById('textarea');
-    document.getElementById('textarea_output').style.display = 'none';
+    textarea_output.style.display = 'none';
     textarea.addEventListener('input', function () {
-        this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
-
 })
-//Encriptando a mensagem
-function encrypt() {
-    const input = document.getElementById('textarea').value
-    let package = ''
-    for (i of input) {
-        if (i == 'a') {
-            package += 'ai'
-        } else if (i == 'e') {
-            package += 'enter'
-        } else if (i == 'i') {
-            package += 'imes'
-        } else if (i == 'o') {
-            package += 'ober'
-        } else if (i == 'u') {
-            package += 'ufat'
-        }
-        else {
-            package += i
-        }
-    }
-    document.getElementById('textarea_output').value = package
-    document.getElementById('textarea').value = ''
-    if (document.getElementById('textarea_output').value != '') {
+
+//Ajustando o CSS da saída
+function heightAdjust(element) {
+    if (element.value != "") {
         document.getElementById('copy').style.display = 'block'
-        document.getElementById('textarea_output').style.display = 'block';
+        element.style.display = 'block'
+        element.style.height = (element.scrollHeight) + 'px';
         document.getElementById('outputPlaceholder').style.display = 'none'
     } else {
         document.getElementById('copy').style.display = 'none'
+        element.style.display = 'none'
         document.getElementById('outputPlaceholder').style.display = 'block'
     }
 }
+
+//Encriptando a mensagem
+function encrypt(passwords) {
+    const input = document.getElementById('textarea').value
+    const output = document.getElementById('textarea_output')
+    let package = ''
+     let check = false
+    for (i of input) {
+        for (k in passwords) {
+            if (i == k) {
+                package += passwords[k]
+                check = true
+                break;
+            }
+        }
+        if (!check) {
+            package += i
+        }
+        check = false
+    }
+    document.getElementById('textarea_output').value = package
+    document.getElementById('textarea').value = ''
+    heightAdjust(output)
+} 
+
 //Resolvendo a mensagem
-function decrypt() {
+function decrypt(passwords) {
     const code = document.getElementById('textarea').value
     let product = ''
     let check = false
     let target = undefined
     let start = undefined
     let end = 0
-    const toObject = function (code) {
-        let result = Object()
-        let lenght = 0
-        for (i of code) {
-            result[lenght] = i
-            lenght++
-        }
-        return result
-    }
-    //Códigos e seus respectivos resultados
-    let passwords = {
-        a: 'ai',
-        e: 'enter',
-        i: 'imes',
-        o: 'ober',
-        u: 'ufat'
-    }
+
     //Array com os diferentes comprimentos obsverváveis das senha em passwords, cada valor aparece 1 vez
     let lengths = passwords => {
         target = 0
@@ -86,6 +84,7 @@ function decrypt() {
         console.log(arr)
         return arr
     }
+
     //Escaneando o código e encontrando as senhas
     const ArrayLengths = lengths(passwords)
     for (start = 0; start <= code.length; start++) {
@@ -108,8 +107,13 @@ function decrypt() {
             product += code.substr(start, 1)
         }
     }
+    const output = document.getElementById('textarea_output')
     document.getElementById('textarea_output').value = product
+
+    //Ajustando o tamanho da saída
+    heightAdjust(output)
 }
+
 //Função copiar
 function copy() {
     const output = document.getElementById('textarea_output').value

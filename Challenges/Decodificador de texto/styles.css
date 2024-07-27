@@ -42,7 +42,7 @@ div#input>textarea {
 
 }
 
-div#input>textarea::placeholder, div#output>textarea::placeholder {
+div#input>textarea::placeholder {
     color: #0A3871;
 }
 
@@ -64,13 +64,19 @@ div#output {
 }
 textarea#textarea_output {
     position: absolute;
+    margin: 0 auto;
+    width: 18vw;
+    height: auto;
+    max-height: 70vh ;
     margin-top: 3vh;
     top: 0;
-    left: 3vh;
+    left: 2vw;
+    right: 2vw;
     font-size: 24px ;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #495057;
     background-color: inherit;
+    box-sizing: border-box;
     border: none;
     outline: none;
     resize: none;
